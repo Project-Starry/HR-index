@@ -16,9 +16,9 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/teams");
-    document.title = "Team | NGC";
+    document.title = "Team";
     this.$vuetify.goTo("#Team");
   },
-  computed: {}
+  computed: {},
 };
 </script>

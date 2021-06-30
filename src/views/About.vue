@@ -53,9 +53,9 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/about");
-    document.title = "About | NGC";
+    document.title = "About ";
     this.$vuetify.goTo("#About");
   },
-  computed: {}
+  computed: {},
 };
 </script>

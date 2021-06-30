@@ -15,17 +15,17 @@ export default {
   name: "Calendar",
   components: {
     post,
-    calendar
+    calendar,
   },
   data() {
     return {
-      auth: null
+      auth: null,
     };
   },
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/calendar");
-    document.title = "Calendar | NGC";
+    document.title = "Calendar";
     this.$vuetify.goTo("#Calendar");
   },
   computed: {
@@ -34,7 +34,7 @@ export default {
     },
     getAdmin() {
       return this.$store.state.isAdmin;
-    }
-  }
+    },
+  },
 };
 </script>

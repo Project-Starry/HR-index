@@ -6,10 +6,6 @@ import vuetify from "./plugins/vuetify";
 import firebase from "firebase";
 import config from "./firebaseConfig.js";
 
-// import VueGAPI from "vue-gapi";
-// import gconfig from "./googleConfig.js";
-// Vue.use(VueGAPI, gconfig);
-
 Vue.config.productionTip = false;
 firebase.initializeApp(config);
 firebase.analytics();

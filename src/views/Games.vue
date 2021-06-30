@@ -16,8 +16,8 @@ export default {
   methods: {},
   mounted() {
     this.$store.commit("setActivedPage", "/games");
-    document.title = "Games | NGC";
+    document.title = "Games";
   },
-  computed: {}
+  computed: {},
 };
 </script>
