@@ -35,12 +35,12 @@ export default {
       },
       set(val) {
         this.$emit("drawerState", val);
-      },
+      }
     },
     resizeScreenSmallerThanLG() {
       return this.$vuetify.breakpoint.mdAndDown;
-    },
-  },
+    }
+  }
 };
 </script>
 

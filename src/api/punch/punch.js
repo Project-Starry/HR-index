@@ -9,12 +9,12 @@ export async function readPunch() {
 
   return await docRef
     .get()
-    .then(async (doc) => {
+    .then(async doc => {
       if (doc.exists) {
         return await doc.data();
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.log("Error getting document:", error);
     });
 }
@@ -49,9 +49,9 @@ function PunchOut(db, name, user, today) {
     .doc(user.uid)
     .update({
       // ['favorites.' + key + '.color']: true
-      ["obj." + today + ".out"]: new Date().toLocaleTimeString(),
+      ["obj." + today + ".out"]: new Date().toLocaleTimeString()
     })
-    .then((docRef) => {
+    .then(docRef => {
       docRef.data();
     });
 }
@@ -64,9 +64,9 @@ function PunchIn(db, name, user, today) {
   db.collection(name)
     .doc(user.uid)
     .set({
-      obj,
+      obj
     })
-    .then((docRef) => {
+    .then(docRef => {
       docRef.data();
     });
 }

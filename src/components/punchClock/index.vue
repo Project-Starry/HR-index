@@ -24,12 +24,12 @@ export default {
           text: "Date",
           align: "start",
           sortable: false,
-          value: "name",
+          value: "name"
         },
         { text: "In", value: "in" },
-        { text: "Out", value: "out" },
+        { text: "Out", value: "out" }
       ],
-      items: [],
+      items: []
     };
   },
   methods: {
@@ -40,19 +40,19 @@ export default {
     },
     async doRead() {
       let data = await readPunch();
-      Object.keys(data.obj).forEach((element) => {
+      Object.keys(data.obj).forEach(element => {
         this.items.push({
           name: element,
           in: data.obj[element].in,
-          out: data.obj[element].out,
+          out: data.obj[element].out
         });
       });
-    },
+    }
   },
   computed: {},
   watch: {},
   async mounted() {
     this.doRead();
-  },
+  }
 };
 </script>

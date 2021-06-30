@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       themeSwitch: false,
-      chosenBtn: "",
+      chosenBtn: ""
     };
   },
   methods: {
@@ -80,7 +80,7 @@ export default {
     },
     setActivedPage(val) {
       this.$store.commit("setActivedPage", val);
-    },
+    }
   },
   computed: {
     getActivedPage() {
@@ -89,13 +89,13 @@ export default {
     showOnLargeScreen() {
       if (this.$vuetify.breakpoint.mdAndDown) return false;
       return true;
-    },
+    }
   },
   watch: {
     themeSwitch(newValue) {
       this.$vuetify.theme.dark = newValue;
-    },
-  },
+    }
+  }
 };
 </script>
 

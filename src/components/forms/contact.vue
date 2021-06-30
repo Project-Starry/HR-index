@@ -74,29 +74,29 @@ export default {
           entry: "entry.597223030",
           value: "",
           rule: [
-            (v) => !!v || "Name is required",
-            (v) => v.length <= 30 || "Name must be less than 10 characters",
-          ],
+            v => !!v || "Name is required",
+            v => v.length <= 30 || "Name must be less than 10 characters"
+          ]
         },
         {
           perform: "信箱",
           entry: "entry.1274605172",
           value: "",
           rule: [
-            (v) => !!v || "E-mail is required",
-            (v) => /.+@.+/.test(v) || "E-mail must be valid",
-          ],
-        },
+            v => !!v || "E-mail is required",
+            v => /.+@.+/.test(v) || "E-mail must be valid"
+          ]
+        }
       ],
       message: {
         perform: "您的訊息",
         entry: "entry.1927840133",
         value: "",
         rule: [
-          (v) => !!v || "Message is required",
-          (v) => v.length <= 300 || "Name must be less than 300 characters",
-        ],
-      },
+          v => !!v || "Message is required",
+          v => v.length <= 300 || "Name must be less than 300 characters"
+        ]
+      }
     };
   },
   methods: {
@@ -117,14 +117,14 @@ export default {
       setTimeout(() => {
         vm.submitState = "";
       }, 1500);
-    },
+    }
   },
   mounted() {
     let form = document.getElementById("form");
     let formdata = new FormData(form);
     console.log(form);
     console.log(formdata);
-  },
+  }
 };
 </script>
 

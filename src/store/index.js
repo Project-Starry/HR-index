@@ -13,8 +13,8 @@ import { retriveImage } from "@/api/retriveData/retriveImage.js";
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      storage: window.sessionStorage,
-    }),
+      storage: window.sessionStorage
+    })
   ],
   state: {
     login: false,
@@ -27,7 +27,7 @@ export default new Vuex.Store({
     adventureX: 640,
     adventureY: 480,
     selectGame: null,
-    selectProject: null,
+    selectProject: null
   },
   mutations: {
     async setUser(state, payload) {
@@ -50,7 +50,7 @@ export default new Vuex.Store({
     },
     async setDatas(state) {
       state.games = await retrive("Games");
-      state.games.forEach(async (element) => {
+      state.games.forEach(async element => {
         element.imgURL = await retriveImage(element);
       });
     },
@@ -59,7 +59,7 @@ export default new Vuex.Store({
     },
     setSelectProject(state, val) {
       state.selectProject = val;
-    },
+    }
   },
   actions: {
     userSignIn() {
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     },
     dispatchUpdateSelectProject(payload) {
       retriveDoc("Projects", payload);
-    },
+    }
   },
-  modules: {},
+  modules: {}
 });

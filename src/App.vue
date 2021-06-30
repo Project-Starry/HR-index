@@ -47,24 +47,24 @@ export default {
         { name: "Game Works", src: "/games" },
         { name: "Schedule", src: "/calendar" },
         { name: "Need Help", src: "/contact" },
-        { name: "Party", src: "/teams" },
-      ],
+        { name: "Party", src: "/teams" }
+      ]
     };
   },
   components: {
     appbar,
-    drawer,
+    drawer
   },
   methods: {
     setDrawer(val) {
       this.drawer = val;
-    },
+    }
   },
   computed: {
     getLoading() {
       return this.$store.state.pageLoading;
-    },
+    }
   },
-  mounted() {},
+  mounted() {}
 };
 </script>

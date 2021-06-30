@@ -60,9 +60,9 @@ export default {
         w: 20,
         h: 20,
         originX: 200,
-        originY: 200,
+        originY: 200
       },
-      builds: [],
+      builds: []
     };
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
         this.$refs.board.width,
         this.$refs.board.width
       );
-      this.builds.forEach((element) => {
+      this.builds.forEach(element => {
         this.context.fillStyle = element.color;
         this.context.fillRect(element.x, element.y, element.w, element.h);
       });
@@ -92,13 +92,13 @@ export default {
         this.position.w,
         this.position.h
       );
-    },
+    }
   },
   mounted() {
     this.builds = building;
     this.doDraw();
   },
-  computed: {},
+  computed: {}
 };
 </script>
 

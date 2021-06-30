@@ -1,7 +1,7 @@
 <template>
   <v-app class="calendar" id="Calendar">
     <v-container>
-      <calendar/>
+      <calendar />
       <post v-if="getAuth && getAdmin" />
     </v-container>
   </v-app>

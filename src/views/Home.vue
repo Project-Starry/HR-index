@@ -54,14 +54,14 @@ export default {
         { icon: "mdi-checkbox-blank-outline" },
         { icon: "mdi-circle-outline" },
         { icon: "mdi-close" },
-        "mdi-gamepad",
-      ],
+        "mdi-gamepad"
+      ]
     };
   },
   methods: {
     handleClick(val) {
       this.$store.dispatch("dispatchSelectGame", val);
-    },
+    }
   },
   mounted() {
     this.$store.commit("setActivedPage", "/");
@@ -70,8 +70,8 @@ export default {
   computed: {
     getGames() {
       return this.$store.state.games;
-    },
-  },
+    }
+  }
 };
 </script>
 

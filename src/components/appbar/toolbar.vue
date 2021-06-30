@@ -43,7 +43,7 @@
 export default {
   data() {
     return {
-      dialog: false,
+      dialog: false
     };
   },
   methods: {
@@ -59,14 +59,14 @@ export default {
       let vm = this;
       vm.dialog = false;
       vm.$store.dispatch("userSignOut");
-    },
+    }
   },
   computed: {
     getUser() {
       console.log(this.$store.state.user);
       return this.$store.state.user;
-    },
-  },
+    }
+  }
 };
 </script>
 

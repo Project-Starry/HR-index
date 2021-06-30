@@ -4,23 +4,12 @@ module.exports = {
   pluginOptions: {
     prerenderSpa: {
       registry: undefined,
-      renderRoutes: [
-        "/",
-        "/about",
-        "/games",
-        "/games/game",
-        "/games/project",
-        "/teams",
-        "/teams/project",
-        "/calendar",
-        "/contact",
-        "/join",
-      ],
+      renderRoutes: ["/", "/about./games", "/teams"],
       useRenderEvent: true,
       headless: true,
-      onlyProduction: true,
-    },
+      onlyProduction: true
+    }
   },
 
-  publicPath: process.env.NODE_ENV === "production" ? "/HR-official/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/hr-official/" : "/"
 };
