@@ -7,9 +7,9 @@ module.exports = {
       renderRoutes: ["/", "/about./games", "/teams"],
       useRenderEvent: true,
       headless: true,
-      onlyProduction: true
-    }
+      onlyProduction: true,
+    },
   },
 
-  publicPath: process.env.NODE_ENV === "production" ? "/hr-official/" : "/"
+  publicPath: process.env.NODE_ENV === "production" ? "/HR-official/" : "/",
 };

@@ -8,6 +8,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f https://github.com/Project-Starry-Game/hr-resource.git master:gh-pages
+git push -f https://github.com/Project-Starry/HR-official.git master:gh-pages
 
 cd -
