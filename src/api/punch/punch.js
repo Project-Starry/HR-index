@@ -1,13 +1,12 @@
 import firebase from "firebase";
 // import store from "../../store";
 
-export async function readPunch() {
+export async function readPunch(uid) {
   let db = firebase.firestore();
-  let user = firebase.auth().currentUser;
 
-  if (user == null) return null;
+  if (uid == null) return null;
 
-  var docRef = db.collection("PunchClock").doc(user.uid);
+  var docRef = db.collection("PunchClock").doc(uid);
 
   return await docRef
     .get()
@@ -36,15 +35,16 @@ export async function doPunchFirebase() {
 
   let type = await docRef.get().then(function(doc) {
     if (doc.exists) {
-      console.log(doc.data().obj[today].out);
-      if (doc.data().obj[today].out != "n/a") {
-        alert("Error !  ");
-        return -1;
-      } else if (today in doc.data().obj) {
-        PunchOut(db, name, user, today);
-        return 1;
+      if (today in doc.data()) {
+        if (doc.data()[today].out != "n/a") {
+          alert("Error !  ");
+          return -1;
+        } else {
+          PunchOut(db, name, user, today);
+          return 1;
+        }
       } else {
-        PunchIn(db, name, user, today);
+        PunchInExist(db, name, user, today);
         return 0;
       }
     } else {
@@ -53,12 +53,7 @@ export async function doPunchFirebase() {
     }
   });
   if (type == -1) return -1;
-
-  if (type == 0) {
-    return today;
-  } else {
-    return null;
-  }
+  else return 1;
 }
 
 function PunchOut(db, name, user, today) {
@@ -66,7 +61,7 @@ function PunchOut(db, name, user, today) {
     .doc(user.uid)
     .update({
       // ['favorites.' + key + '.color']: true
-      ["obj." + today + ".out"]: new Date().toLocaleTimeString(),
+      [today + ".out"]: new Date().toLocaleTimeString(),
     })
     .then((docRef) => {
       alert("下班");
@@ -75,17 +70,23 @@ function PunchOut(db, name, user, today) {
 }
 
 function PunchIn(db, name, user, today) {
-  var key = today;
-  var obj = {};
-  obj[key] = { in: new Date().toLocaleTimeString(), out: "n/a" };
+  var obj = { [today]: { in: new Date().toLocaleTimeString(), out: "n/a" } };
 
   db.collection(name)
     .doc(user.uid)
-    .set({
-      obj,
-    })
-    .then((docRef) => {
+    .set(obj)
+    .then(() => {
       alert("上班");
-      docRef.data();
+    });
+}
+
+function PunchInExist(db, name, user, today) {
+  var obj = { [today]: { in: new Date().toLocaleTimeString(), out: "n/a" } };
+
+  db.collection(name)
+    .doc(user.uid)
+    .update(obj)
+    .then(() => {
+      alert("上班");
     });
 }
