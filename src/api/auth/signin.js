@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { register } from "@/api/auth/register.js";
 import store from "../../store";
 
 export async function signin() {
@@ -12,6 +13,7 @@ export async function signin() {
     .signInWithPopup(provider)
     .then(function(result) {
       store.commit("setUser", result.user);
+      register(result.user);
       return result.user;
     })
     .catch(function(error) {

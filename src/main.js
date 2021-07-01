@@ -16,7 +16,15 @@ new Vue({
   vuetify,
   render: (h) => h(App),
   mounted: () => document.dispatchEvent(new Event("x-app-rendered")),
-  created() {},
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        store.commit("setUser", user);
+      } else {
+        store.commit("setUser", user);
+      }
+    });
+  },
 }).$mount("#app");
 
 //Ignore error fomr .native

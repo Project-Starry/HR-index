@@ -9,25 +9,15 @@
 <script>
 import punchClock from "@/components/punchClock/index.vue";
 export default {
-  name: "home",
+  name: "PunchClock",
   components: { punchClock },
   data() {
     return {};
   },
-  methods: {
-    handleClick(val) {
-      this.$store.dispatch("dispatchSelectGame", val);
-    },
-  },
+  methods: {},
   mounted() {
     document.dispatchEvent(new Event("render-event"));
-    this.$store.commit("setActivedPage", "/");
-    document.title = "Home";
-  },
-  computed: {
-    getGames() {
-      return this.$store.state.games;
-    },
+    document.title = "PunchClock";
   },
 };
 </script>

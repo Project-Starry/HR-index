@@ -1,9 +1,8 @@
 import firebase from "firebase";
 import store from "../../store";
 
-export function register() {
+export function register(user) {
   let db = firebase.firestore();
-  let user = firebase.auth().currentUser;
   let docRef = db.collection("Users").doc(user.uid);
   docRef
     .get()
@@ -13,7 +12,7 @@ export function register() {
         db.collection("Users")
           .doc(user.uid)
           .update({
-            lastSignin: new Date()
+            lastSignin: new Date(),
           });
       } else {
         db.collection("Users")
@@ -26,7 +25,7 @@ export function register() {
             parties: [],
             profile: "",
             lastSignin: new Date(),
-            lastSend: firebase.firestore.FieldValue.serverTimestamp()
+            lastSend: firebase.firestore.FieldValue.serverTimestamp(),
           })
           .then(function() {
             console.log("註冊成功");

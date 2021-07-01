@@ -41,6 +41,7 @@
 
 <script>
 import { signin } from "@/api/auth/signin.js";
+import { signout } from "@/api/auth/signout.js";
 
 export default {
   data() {
@@ -63,7 +64,7 @@ export default {
       let vm = this;
       vm.dialog = false;
       vm.getUser = null;
-      vm.$store.dispatch("userSignOut");
+      signout();
     },
   },
   mounted() {

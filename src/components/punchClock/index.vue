@@ -1,19 +1,24 @@
 <template>
   <div>
-    <v-toolbar elevation="0">
-      <v-btn v-if="!loading" @click="doPunch" text outlined width="100">
-        打卡
-      </v-btn>
-      <v-card-title>{{ state }}</v-card-title>
-    </v-toolbar>
-    <v-data-table
-      :headers="headers"
-      :items="items"
-      :items-per-page="5"
-      class="elevation-1"
-      :loading="loading"
-      loading-text="Loading... Please wait"
-    ></v-data-table>
+    <div v-if="getAuth">
+      <v-toolbar elevation="0">
+        <v-btn v-if="!loading" @click="doPunch" text outlined width="100">
+          打卡
+        </v-btn>
+        <v-card-title>{{ state }}</v-card-title>
+      </v-toolbar>
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        :items-per-page="5"
+        class="elevation-1"
+        :loading="loading"
+        loading-text="Loading... Please wait"
+      ></v-data-table>
+    </div>
+    <div v-else>
+      <span>You can see me as logged in</span>
+    </div>
   </div>
 </template>
 
@@ -42,6 +47,10 @@ export default {
       items: [],
     };
   },
+  mounted() {
+    this.user = this.getAuth;
+    if (this.user) this.doRead();
+  },
   methods: {
     async doPunch() {
       let data = await doPunchFirebase();
@@ -66,6 +75,8 @@ export default {
           out: data[element].out,
         });
       });
+
+      this.checkState();
     },
     checkState() {
       let today = new Date();
@@ -81,12 +92,10 @@ export default {
       });
     },
   },
-  computed: {},
-  watch: {},
-  async mounted() {
-    this.user = await this.$store.state.user;
-    await this.doRead();
-    await this.checkState();
+  computed: {
+    getAuth() {
+      return this.$store.getters.getAuth;
+    },
   },
 };
 </script>

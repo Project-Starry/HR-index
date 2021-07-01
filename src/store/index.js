@@ -29,10 +29,15 @@ export default new Vuex.Store({
     selectGame: null,
     selectProject: null,
   },
+  getters: {
+    getAuth(state) {
+      return state.user;
+    },
+  },
   mutations: {
     async setUser(state, payload) {
-      if (payload == null) return;
       state.user = payload;
+      if (payload == null) return;
       let adminList = ["t107590017@ntut.org.tw"];
       if (adminList.includes(payload.email)) state.isAdmin = true;
     },
