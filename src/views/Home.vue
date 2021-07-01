@@ -37,15 +37,13 @@
         </v-carousel> -->
       </v-row>
     </v-container>
-    <v-container> <punchClock /></v-container>
   </v-app>
 </template>
 
 <script>
-import punchClock from "@/components/punchClock/index.vue";
 export default {
   name: "home",
-  components: { punchClock },
+  components: {},
   data() {
     return {
       selectIcon: "mdi-delta",

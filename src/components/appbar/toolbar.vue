@@ -9,7 +9,7 @@
       >
         <v-icon class="side-icon" color="quaternary">mdi-google-chrome</v-icon>
         <span class="contact-text quaternary--text" v-if="getUser">{{
-          getUser[0].displayName
+          getUser.displayName
         }}</span>
         <span class="contact-text quaternary--text" v-else>Login</span>
       </v-btn>
@@ -40,33 +40,35 @@
 </template>
 
 <script>
+import { signin } from "@/api/auth/signin.js";
+
 export default {
   data() {
     return {
-      dialog: false
+      dialog: false,
+      getUser: null,
     };
   },
   methods: {
-    sigin() {
+    async sigin() {
       let vm = this;
       if (vm.getUser) {
         vm.dialog = true;
         return;
       }
-      vm.$store.dispatch("userSignIn");
+      vm.getUser = await signin();
+      // vm.$store.dispatch("userSignIn");
     },
     singout() {
       let vm = this;
       vm.dialog = false;
+      vm.getUser = null;
       vm.$store.dispatch("userSignOut");
-    }
+    },
   },
-  computed: {
-    getUser() {
-      console.log(this.$store.state.user);
-      return this.$store.state.user;
-    }
-  }
+  mounted() {
+    this.getUser = this.$store.state.user;
+  },
 };
 </script>
 

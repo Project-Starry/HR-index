@@ -16,17 +16,7 @@ new Vue({
   vuetify,
   render: (h) => h(App),
   mounted: () => document.dispatchEvent(new Event("x-app-rendered")),
-  created() {
-    store.commit("setLoading", true);
-    store.commit("setDatas");
-    firebase.auth().onAuthStateChanged((firebaseUser) => {
-      if (firebaseUser) {
-        store.dispatch("autoSignIn", firebaseUser);
-      } else {
-        store.commit("setLoading", false);
-      }
-    });
-  },
+  created() {},
 }).$mount("#app");
 
 //Ignore error fomr .native

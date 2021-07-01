@@ -4,7 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
-import { signin, getAuthState } from "@/api/auth/signin.js";
+import { signin } from "@/api/auth/signin.js";
 import { signout } from "@/api/auth/signout.js";
 import { register } from "@/api/auth/register.js";
 import { retrive, retriveDoc } from "@/api/retriveData/retrive.js";
@@ -13,8 +13,8 @@ import { retriveImage } from "@/api/retriveData/retriveImage.js";
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      storage: window.sessionStorage
-    })
+      storage: window.sessionStorage,
+    }),
   ],
   state: {
     login: false,
@@ -27,30 +27,24 @@ export default new Vuex.Store({
     adventureX: 640,
     adventureY: 480,
     selectGame: null,
-    selectProject: null
+    selectProject: null,
   },
   mutations: {
     async setUser(state, payload) {
-      let auth = [];
-      auth.push(payload);
-      auth.push(await getAuthState(payload));
-      state.user = auth;
       if (payload == null) return;
+      state.user = payload;
       let adminList = ["t107590017@ntut.org.tw"];
       if (adminList.includes(payload.email)) state.isAdmin = true;
     },
     setLogin(state, payload) {
       state.login = payload;
     },
-    setLoading(state, val) {
-      state.pageLoading = val;
-    },
     setActivedPage(state, val) {
       state.activedPage = val;
     },
     async setDatas(state) {
       state.games = await retrive("Games");
-      state.games.forEach(async element => {
+      state.games.forEach(async (element) => {
         element.imgURL = await retriveImage(element);
       });
     },
@@ -59,7 +53,7 @@ export default new Vuex.Store({
     },
     setSelectProject(state, val) {
       state.selectProject = val;
-    }
+    },
   },
   actions: {
     userSignIn() {
@@ -82,7 +76,7 @@ export default new Vuex.Store({
     },
     dispatchUpdateSelectProject(payload) {
       retriveDoc("Projects", payload);
-    }
+    },
   },
-  modules: {}
+  modules: {},
 });

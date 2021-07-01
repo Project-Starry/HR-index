@@ -43,28 +43,28 @@ export default {
       drawer: false,
       items: [
         { name: "Home", src: "/" },
+        { name: "Punch Clock", src: "/punchCLock" },
         { name: "Starry Game", src: "/about" },
-        { name: "Game Works", src: "/games" },
         { name: "Schedule", src: "/calendar" },
         { name: "Need Help", src: "/contact" },
-        { name: "Party", src: "/teams" }
-      ]
+        { name: "Party", src: "/teams" },
+      ],
     };
   },
   components: {
     appbar,
-    drawer
+    drawer,
   },
   methods: {
     setDrawer(val) {
       this.drawer = val;
-    }
+    },
   },
   computed: {
     getLoading() {
       return this.$store.state.pageLoading;
-    }
+    },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>

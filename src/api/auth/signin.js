@@ -1,19 +1,20 @@
 import firebase from "firebase";
+import store from "../../store";
 
-export function signin() {
+export async function signin() {
   let provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().languageCode = "zh-TW";
   provider.setCustomParameters({
-    hd: "ntut.org.tw"
+    hd: "gmail.com",
   });
-  firebase.auth().signInWithRedirect(provider);
-}
-
-export async function getAuthState(user) {
-  const snapshot = await firebase
-    .firestore()
-    .collection("Users")
-    .where("UID", "==", user.uid)
-    .get();
-  return snapshot.docs.map(doc => doc.data());
+  return await firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+      store.commit("setUser", result.user);
+      return result.user;
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }

@@ -5,24 +5,27 @@ export async function readPunch() {
   let db = firebase.firestore();
   let user = firebase.auth().currentUser;
 
+  if (user == null) return null;
+
   var docRef = db.collection("PunchClock").doc(user.uid);
 
   return await docRef
     .get()
-    .then(async doc => {
+    .then(async (doc) => {
       if (doc.exists) {
-        return await doc.data();
+        return doc.data();
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.log("Error getting document:", error);
     });
 }
 
-export function doPunchFirebase() {
+export async function doPunchFirebase() {
   let name = "PunchClock";
   let db = firebase.firestore();
   let user = firebase.auth().currentUser;
+  if (user == null) return;
   let docRef = db.collection(name).doc(user.uid);
 
   let today = new Date();
@@ -31,17 +34,31 @@ export function doPunchFirebase() {
   let yyyy = today.getFullYear();
   today = mm + "" + dd + "" + yyyy;
 
-  docRef.get().then(function(doc) {
+  let type = await docRef.get().then(function(doc) {
     if (doc.exists) {
-      if (today in doc.data().obj) {
+      console.log(doc.data().obj[today].out);
+      if (doc.data().obj[today].out != "n/a") {
+        alert("Error !  ");
+        return -1;
+      } else if (today in doc.data().obj) {
         PunchOut(db, name, user, today);
+        return 1;
       } else {
         PunchIn(db, name, user, today);
+        return 0;
       }
     } else {
       PunchIn(db, name, user, today);
+      return 0;
     }
   });
+  if (type == -1) return -1;
+
+  if (type == 0) {
+    return today;
+  } else {
+    return null;
+  }
 }
 
 function PunchOut(db, name, user, today) {
@@ -49,9 +66,10 @@ function PunchOut(db, name, user, today) {
     .doc(user.uid)
     .update({
       // ['favorites.' + key + '.color']: true
-      ["obj." + today + ".out"]: new Date().toLocaleTimeString()
+      ["obj." + today + ".out"]: new Date().toLocaleTimeString(),
     })
-    .then(docRef => {
+    .then((docRef) => {
+      alert("下班");
       docRef.data();
     });
 }
@@ -64,9 +82,10 @@ function PunchIn(db, name, user, today) {
   db.collection(name)
     .doc(user.uid)
     .set({
-      obj
+      obj,
     })
-    .then(docRef => {
+    .then((docRef) => {
+      alert("上班");
       docRef.data();
     });
 }

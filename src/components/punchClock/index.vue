@@ -24,35 +24,50 @@ export default {
           text: "Date",
           align: "start",
           sortable: false,
-          value: "name"
+          value: "name",
         },
         { text: "In", value: "in" },
-        { text: "Out", value: "out" }
+        { text: "Out", value: "out" },
       ],
-      items: []
+      items: [],
     };
   },
   methods: {
     async doPunch() {
-      let temp = await doPunchFirebase();
-      this;
-      console.log(temp);
+      let data = await doPunchFirebase();
+      console.log(data);
+      if (data == -1) return;
+      if (data) {
+        let d = {
+          name: data,
+          in: new Date().toLocaleTimeString(),
+          out: "n/a",
+        };
+        this.item.push(d);
+      } else {
+        this.items[this.items.length - 1].out = new Date().toLocaleTimeString();
+      }
     },
     async doRead() {
       let data = await readPunch();
-      Object.keys(data.obj).forEach(element => {
+      this.ensertData(data);
+    },
+    ensertData(data) {
+      if (!data) return;
+      this.items = [];
+      Object.keys(data.obj).forEach((element) => {
         this.items.push({
           name: element,
           in: data.obj[element].in,
-          out: data.obj[element].out
+          out: data.obj[element].out,
         });
       });
-    }
+    },
   },
   computed: {},
   watch: {},
   async mounted() {
     this.doRead();
-  }
+  },
 };
 </script>
