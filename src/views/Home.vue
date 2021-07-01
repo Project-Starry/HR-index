@@ -62,6 +62,7 @@ export default {
     },
   },
   mounted() {
+    document.dispatchEvent(new Event("render-event"));
     this.$store.commit("setActivedPage", "/");
     document.title = "Home";
   },

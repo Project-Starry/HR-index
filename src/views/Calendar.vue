@@ -24,6 +24,7 @@ export default {
   },
   methods: {},
   mounted() {
+    document.dispatchEvent(new Event("render-event"));
     this.$store.commit("setActivedPage", "/calendar");
     document.title = "Calendar";
     this.$vuetify.goTo("#Calendar");

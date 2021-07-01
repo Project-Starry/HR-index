@@ -11,6 +11,7 @@ export default {
   components: { contactForm },
   methods: {},
   mounted() {
+    document.dispatchEvent(new Event("render-event"));
     this.$store.commit("setActivedPage", "/contact");
     document.title = "Contact";
     this.$vuetify.goTo("#Contact");
